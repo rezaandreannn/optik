@@ -1,11 +1,33 @@
-@props(['active'])
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-table"></i> Data Master <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('category.index') }}">Kategori</a></li>
+                    <li><a href="">Produk</a></li>
+                    <li><a href="">Pesan</a></li>
+                </ul>
+            </li>
 
-@php
-$classes = ($active ?? false)
-            ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
-@endphp
+        </ul>
+    </div>
+    <div class="menu_section">
+        <h3>Lainnya</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-cog"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="">User</a></li>
+                    <li><a href="">Role</a></li>
+                    {{-- <li><a href="#">Contacts</a></li> --}}
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
+</div>

@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('frondend.index');
+});
+
+
+Route::middleware('auth', 'ceklogin:admin')->group(function () {
+    Route::Resource('roles', 'App\Http\Controllers\RoleController');
+    Route::Resource('users', 'App\Http\Controllers\UserController');
+    Route::Resource('category', 'App\Http\Controllers\CategoryController');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
