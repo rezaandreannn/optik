@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -74,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -86,7 +87,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'photo' => 'image|file'
+        ]);
+
+        if ($request->file('photo')) {
+            // hapus gambar lama
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $data['photo'] = $request->file('photo')->store('category/images');
+        }
+
+        $data['added_by'] = Auth::user()->name;
+
+        Category::where('id', $category->id)
+            ->update($data);
+
+        // kembali ke page index with alert
+        return redirect('category')->with('success', 'berhasil mengubah data kategori');
     }
 
     /**
@@ -97,6 +118,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::where('id', $category->id)
+            ->delete();
+
+
+        // kembali ke page index with alert
+        return redirect('category')->with('success', 'berhasil menghapus data kategori');
     }
 }

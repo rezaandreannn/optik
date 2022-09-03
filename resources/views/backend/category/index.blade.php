@@ -28,7 +28,7 @@
                                             <th style="max-width: 5px">No</th>
                                             <th>Nama</th>
                                             <th>Deskripsi</th>
-                                            <th>Ditambahkan</th>
+                                            <th>Gambar</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
@@ -38,16 +38,13 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>{{ $category->description }}</td>
-
-                                                <td>{{ $category->added_by }}</td>
+                                                <td><img src="{{ asset('storage/' . $category->photo) }}"
+                                                        alt="{{ $category->name }}" height="70px" width="70px"></td>
                                                 <td>
-                                                    {{-- Detail category --}}
-                                                    <a href="{{ route('category.show', $category->id) }}"><i
-                                                            class="fa fa-info fa-2x text-primary"></i></a>
-                                                    {{-- end detail category --}}
+
                                                     {{-- edit category --}}
-                                                    <a href="{{ route('category.edit', $category->id) }}"><i
-                                                            class="fa fa-pencil fa-2x text-warning ml-2"></i></a>
+                                                    <a href="{{ route('category.edit', $category->id) }}"
+                                                        class="badge badge-warning border-0">Edit</a>
                                                     {{-- end edit category --}}
                                                     {{-- delete category --}}
                                                     <form action="{{ route('category.destroy', [$category->id]) }}"
@@ -56,8 +53,7 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <button class="badge badge-danger border-0 d-inline"
-                                                            type="submit"><i
-                                                                class="fa fa-trash fa-2x text-white"></i></button>
+                                                            type="submit">Hapus</button>
                                                     </form>
                                                     {{-- end delete category --}}
                                                 </td>
