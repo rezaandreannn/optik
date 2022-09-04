@@ -73,9 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
@@ -85,9 +85,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data =  $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'role_id' => 'required|not_in:0',
+
+        ]);
+
+        if ($request->password !=  null) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+
+        User::where('id', $user->id)
+            ->update($data);
+
+        return redirect('user')->with('success', 'Berhasil mengubah data user');
     }
 
     /**
@@ -96,8 +110,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        User::where('id', $user->id)
+            ->delete();
+
+        return redirect('user')->with('success', 'Berhasil menghapus data user');
     }
 }

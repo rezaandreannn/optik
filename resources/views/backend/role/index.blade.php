@@ -1,6 +1,13 @@
 <x-app-layout title="Role">
     <div class="row">
-        <div class="col-md-12 col-sm-12 ">
+        <div class="col-md-12 col-sm-12">
+            {{-- pesan flashdata --}}
+            @if (session('success'))
+                <div class="alert alert-primary" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            {{-- end pesan flashdata --}}
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Role </h2>
