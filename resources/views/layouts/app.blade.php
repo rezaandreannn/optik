@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title ?? config('app.name') }} </title>
+    <title>{{ $title ?? config('app.name') }} | {{ config('app.name') }} </title>
 
     {{-- faicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('backend/guest/images/logo.ico') }}">
@@ -89,6 +89,8 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
+                                    <a href="/" class="dropdown-item">template</a>
+                                    <hr>
                                     <form action="{{ route('logout') }}" method="post">
                                         @csrf
                                         <button type="submit" class="dropdown-item" href=""><i

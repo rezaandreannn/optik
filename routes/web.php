@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Frond\BerandaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +18,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('frondend.index');
-});
+// Route::get('/', function () {
+//     return view('frondend.index');
+// });
+
+Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {
-    Route::Resource('roles', 'App\Http\Controllers\RoleController');
-    Route::Resource('users', 'App\Http\Controllers\UserController');
+    Route::Resource('role', 'App\Http\Controllers\RoleController');
+    Route::Resource('user', 'App\Http\Controllers\UserController');
     Route::Resource('category', 'App\Http\Controllers\CategoryController');
+    Route::Resource('product', 'App\Http\Controllers\ProductController');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

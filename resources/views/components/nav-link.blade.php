@@ -10,7 +10,8 @@
             <li><a><i class="fa fa-table"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('category.index') }}">Kategori</a></li>
-                    <li><a href="">Produk</a></li>
+                    <li><a href="{{ route('product.index') }}">Produk</a></li>
+                    {{-- <li><a href="">Produk</a></li> --}}
                     <li><a href="">Pesan</a></li>
                 </ul>
             </li>
@@ -22,8 +23,8 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-cog"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="">User</a></li>
-                    <li><a href="">Role</a></li>
+                    <li><a href="{{ route('user.index') }}">User</a></li>
+                    <li><a href="{{ route('role.index') }}">Role</a></li>
                     {{-- <li><a href="#">Contacts</a></li> --}}
                 </ul>
             </li>

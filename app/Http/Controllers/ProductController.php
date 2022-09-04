@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
 
-        return view('backend.role.index', compact('roles'));
+        $products = Product::orderBy('id', 'desc')->paginate(10);
+
+        return view('backend.product.index', compact('products'));
     }
 
     /**
@@ -26,7 +28,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('backend.role.create');
+        return view('backend.product.create');
     }
 
     /**
@@ -37,23 +39,38 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        // $category_id = '';
+        // $category = Category::all();
+        // foreach ($category as $value) {
+        //     $category_id = $value->id;
+        // }
+
+        // dd($category_id);
+
         $data = $request->validate([
             'name' => 'required',
+            'category_id' => 'required|not_in:0',
             'description' => 'required',
+            'photo' => 'required|image|file',
+            'qty' => 'required',
+            'price' => 'required'
         ]);
 
-        Role::create($data);
+        $data['photo'] = $request->file('photo')->store('product/images');
 
-        return redirect('role')->with('success', 'Berhasil menambahkan data Role');
+        Product::create($data);
+
+        // kembali ke page index with alert
+        return redirect('product')->with('success', 'berhasil mengubah data product');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Product $product)
     {
         //
     }
@@ -61,45 +78,34 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Product $product)
     {
-        return view('backend.role.edit', compact('role'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Product $product)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-
-        Role::where('id', $role->id)
-            ->update($data);
-
-        return redirect('role')->with('success', 'Berhasil mengubah data Role');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Product $product)
     {
-        Role::where('id', $role->id)
-            ->delete();
-
-        return redirect('role')->with('success', 'Berhasil menghapus data Role');
+        //
     }
 }
