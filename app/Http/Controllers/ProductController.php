@@ -39,13 +39,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // $category_id = '';
-        // $category = Category::all();
-        // foreach ($category as $value) {
-        //     $category_id = $value->id;
-        // }
-
-        // dd($category_id);
 
         $data = $request->validate([
             'name' => 'required',
@@ -61,7 +54,7 @@ class ProductController extends Controller
         Product::create($data);
 
         // kembali ke page index with alert
-        return redirect('product')->with('success', 'berhasil mengubah data product');
+        return redirect('product')->with('success', 'berhasil mengubah data produk');
     }
 
     /**
@@ -83,7 +76,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('backend.product.edit', compact('product'));
     }
 
     /**
@@ -106,6 +99,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::where('id', $product->id)
+            ->delete();
+
+        // kembali ke page index with alert
+        return redirect('product')->with('success', 'berhasil menghapus data produk');
     }
 }

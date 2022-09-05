@@ -44,7 +44,7 @@
 
                                                     {{-- edit category --}}
                                                     <a href="{{ route('category.edit', $category->id) }}"
-                                                        class="badge badge-warning border-0">Edit</a>
+                                                        class="btn btn-warning border-0">Edit</a>
                                                     {{-- end edit category --}}
                                                     {{-- delete category --}}
                                                     <form action="{{ route('category.destroy', [$category->id]) }}"
@@ -52,7 +52,7 @@
                                                         onsubmit="return confirm('yakin menghapus ?')">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button class="badge badge-danger border-0 d-inline"
+                                                        <button class="btn btn-danger border-0 d-inline"
                                                             type="submit">Hapus</button>
                                                     </form>
                                                     {{-- end delete category --}}

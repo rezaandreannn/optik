@@ -12,5 +12,7 @@ class DashboardController extends Controller
         if (Auth::user()->role_id != 1) {
             return redirect()->route('beranda');
         }
+
+        return view('dashboard');
     }
 }
