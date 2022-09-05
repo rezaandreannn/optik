@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Frond\BerandaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Frond\ShopController;
+use App\Http\Controllers\Frond\BerandaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/product-detail/{id}', [ShopController::class, 'product_detail'])->name('product.detail');
 
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {

@@ -44,13 +44,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link active" href="index.html">Home</a>
+                                <!-- Link--><a class="nav-link" href="/">Beranda</a>
                             </li>
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link" href="shop.html">Shop</a>
+                                <!-- Link--><a class="nav-link" href="{{ route('shop') }}">Belanja</a>
                             </li>
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link" href="detail.html">Product detail</a>
+                                <!-- Link--><a class="nav-link" href="detail.html">Produk detail</a>
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
                                     href="#" data-bs-toggle="dropdown" aria-haspopup="true"
