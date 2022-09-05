@@ -7,7 +7,9 @@
         <div class="x_content">
 
             <!-- start form for validation -->
-            <form id="demo-form" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
+            <form id="demo-form" method="POST" action="{{ route('product.update', $product->id) }}"
+                enctype="multipart/form-data">
+                @method('PATCH')
                 @csrf
                 {{-- inputan name --}}
                 <div class="form-group">
@@ -48,6 +50,14 @@
                 {{-- inputan photo --}}
                 <div class="form-group mt-2">
                     <label for="image">Gambar<span class="text-danger">*</span></label>
+                    {{-- cek apakah gambar ada --}}
+                    @if ($product->photo)
+                        <img src="{{ asset('storage/' . $product->photo) }}" class="img-preview mb-2 d-block"
+                            style="width: 300px">
+                    @else
+                        <img class="img-preview mb-2" style="width: 300px">
+                    @endif
+                    <input type="hidden" value="{{ $product->photo }}" name="oldImage">
                     <img class="img-preview mb-2" style="width: 300px">
                     <input class="d-block @error('photo') is-invalid @enderror" type="file" id="image"
                         name="photo" onchange="Live()">

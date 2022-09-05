@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -88,7 +90,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+        $data = $request->validate([
+            'name' => 'required',
+            'category_id' => 'required|not_in:0',
+            'description' => 'required',
+            'photo' => 'image|file',
+            'qty' => 'required',
+            'price' => 'required'
+        ]);
+
+        if ($request->file('photo')) {
+            // hapus gambar lama
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $data['photo'] = $request->file('photo')->store('product/images');
+        }
+
+
+
+        Product::where('id', $product->id)
+            ->update($data);
+
+        // kembali ke page index with alert
+        return redirect('product')->with('success', 'berhasil mengubah data product');
     }
 
     /**
