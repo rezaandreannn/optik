@@ -54,12 +54,12 @@
                         Masuk
                     </a> --}}
                 @else
-                    <a href="{{ route('order.index') }}" class="text-decoration-none me-4">
+                    {{-- <a href="{{ route('order.index') }}" class="text-decoration-none me-4">
                         <button type="button" class="btn position-relative">
                             <i class="fa fa-shopping-cart"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span>
                         </button>
-                    </a>
+                    </a> --}}
                     <a href="{{ route('login') }}" class="ml-5 btn btn-success">
                         Masuk
                     </a>
