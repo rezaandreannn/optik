@@ -69,9 +69,9 @@
                             <li class="nav-item"><a class="nav-link" href="cart.html"> <i
                                         class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
                                         class="text-gray fw-normal">(2)</small></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!"> <i
+                            {{-- <li class="nav-item"><a class="nav-link" href="#!"> <i
                                         class="far fa-heart me-1"></i><small class="text-gray fw-normal">
-                                        (0)</small></a></li>
+                                        (0)</small></a></li> --}}
                             @auth
                                 <li class="nav-item"><a class="nav-link" href="#"> <i
                                             class="fas fa-user me-1 text-gray fw-normal"></i>{{ Auth::user()->name }}</a>
@@ -126,11 +126,11 @@
                 <div class="border-top pt-4" style="border-color: #1d1d1d !important">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start">
-                            <p class="small text-muted mb-0">&copy; 2021 All rights reserved.</p>
+                            <p class="small text-muted mb-0">&copy; {{ Date('Y') }} All rights reserved.</p>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <p class="small text-muted mb-0">Template designed by <a class="text-white reset-anchor"
-                                    href="https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template">Bootstrapious</a>
+                                    href="https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template">{{ config('app.name') }}</a>
                             </p>
                             <!-- If you want to remove the backlink, please purchase the Attribution-Free License. See details in readme.txt or license.txt. Thanks!-->
                         </div>

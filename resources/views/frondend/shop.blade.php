@@ -1,10 +1,10 @@
-<x-frond-layout>
+<x-frond-layout title="Belanja">
     <!-- HERO SECTION-->
     <section class="py-5 bg-light">
         <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="h2 text-uppercase mb-0">Belanjaa</h1>
+                    <h1 class="h2 text-uppercase mb-0">Belanja Lebih Asyik😊</h1>
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <nav aria-label="breadcrumb">
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <h6> <a class="reset-anchor" href="detail.html">{{ $product->name }}</a></h6>
-                                    <p class="small text-muted">Rp. {{ $product->price }}</p>
+                                    <p class="small text-muted">@currency($product->price)</p>
                                 </div>
                             </div>
                         @endforeach

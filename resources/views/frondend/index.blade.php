@@ -39,7 +39,7 @@
                                         </li> --}}
                                     </ul>
                                     <h2 class="h4">{{ $product->name }}</h2>
-                                    <p class="text-muted">{{ $product->price }}</p>
+                                    <p class="text-muted">@currency($product->price)</p>
                                     <p class="text-sm mb-4">{{ $product->description }}</p>
                                     <div class="row align-items-stretch mb-4 gx-0">
                                         <div class="col-sm-7">
@@ -48,18 +48,18 @@
                                                 <span
                                                     class="small text-uppercase text-gray mr-4 no-select">Jumlah</span>
                                                 <div class="quantity">
-                                                    <button class="dec-btn p-0"><i
-                                                            class="fas fa-caret-left"></i></button>
-                                                    <input class="form-control border-0 shadow-0 p-0" type="text"
-                                                        value="1" name="qty">
-                                                    <button class="inc-btn p-0"><i
-                                                            class="fas fa-caret-right"></i></button>
+                                                    {{-- <button class="dec-btn p-0"><i
+                                                            class="fas fa-caret-left"></i></button> --}}
+                                                    <input class="form-control border-0 shadow-0 p-0" type="number"
+                                                        value="1" name="qty" min="1">
+                                                    {{-- <button class="inc-btn p-0"><i
+                                                            class="fas fa-caret-right"></i></button> --}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-5"><a
                                                 class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                                href="cart.html">Add to cart</a></div>
+                                                href="cart.html">Tambah ke keranjang</a></div>
                                     </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i
                                             class="far fa-heart me-2"></i>Add to wish list</a>
                                 </div>
@@ -77,9 +77,9 @@
             <div class="container py-5">
                 <div class="row px-4 px-lg-5">
                     <div class="col-lg-6">
-                        <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>
-                        <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark"
-                            href="shop.html">Browse collections</a>
+                        <p class="text-muted small text-uppercase mb-2">Inspirasi Baru {{ date('Y') }}</p>
+                        <h1 class="h2 text-uppercase mb-3">Banyak Diskon</h1><a class="btn btn-dark"
+                            href="{{ route('shop') }}">Koleksi kami</a>
                     </div>
                 </div>
             </div>
@@ -117,10 +117,10 @@
                                         alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
-                                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
-                                                href="#!"><i class="far fa-heart"></i></a></li>
+                                        {{-- <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
+                                                href="#!"><i class="far fa-heart"></i></a></li> --}}
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                href="cart.html">Add to cart</a></li>
+                                                href="cart.html">Tambah ke keranjang</a></li>
                                         <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark"
                                                 href="#productView{{ $product->id }}" data-bs-toggle="modal"><i
                                                     class="fas fa-expand"></i></a></li>
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <h6> <a class="reset-anchor" href="detail.html">{{ $product->name }}</a></h6>
-                            <p class="small text-muted">{{ $product->price }}</p>
+                            <p class="small text-muted">@currency($product->price)</p>
                         </div>
                     </div>
                 @endforeach
@@ -145,8 +145,8 @@
                                     <use xlink:href="#delivery-time-1"> </use>
                                 </svg>
                                 <div class="text-start ms-3">
-                                    <h6 class="text-uppercase mb-1">Free shipping</h6>
-                                    <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
+                                    <h6 class="text-uppercase mb-1">Bebas biaya kirim</h6>
+                                    <p class="text-sm mb-0 text-muted">Bebas biaya kirim untuk Wilayah Lampung</p>
                                 </div>
                             </div>
                         </div>
@@ -158,8 +158,8 @@
                                     <use xlink:href="#helpline-24h-1"> </use>
                                 </svg>
                                 <div class="text-start ms-3">
-                                    <h6 class="text-uppercase mb-1">24 x 7 service</h6>
-                                    <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
+                                    <h6 class="text-uppercase mb-1">Layanan 24 Jam</h6>
+                                    <p class="text-sm mb-0 text-muted">Bebas biaya kirim untuk Wilayah Lampung</p>
                                 </div>
                             </div>
                         </div>
@@ -171,8 +171,8 @@
                                     <use xlink:href="#label-tag-1"> </use>
                                 </svg>
                                 <div class="text-start ms-3">
-                                    <h6 class="text-uppercase mb-1">Festivaloffers</h6>
-                                    <p class="text-sm mb-0 text-muted">Free shipping worldwide</p>
+                                    <h6 class="text-uppercase mb-1">Penawaran Festival</h6>
+                                    <p class="text-sm mb-0 text-muted">Bebas biaya kirim untuk Wilayah Lampung</p>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
             </div>
         </section>
         <!-- NEWSLETTER-->
-        <section class="py-5">
+        {{-- <section class="py-5">
             <div class="container p-0">
                 <div class="row gy-3">
                     <div class="col-lg-6">
@@ -199,6 +199,6 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
 </x-frond-layout>

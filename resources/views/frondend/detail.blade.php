@@ -1,4 +1,4 @@
-<x-frond-layout>
+<x-frond-layout title="Detail-Produk">
     <section class="py-5">
         <div class="container">
             <div class="row mb-5">
@@ -36,7 +36,7 @@
                 <div class="col-lg-6">
 
                     <h1>{{ $product->name }}</h1>
-                    <p class="text-muted lead">Rp. {{ $product->price }}</p>
+                    <p class="text-muted lead">@currency($product->price)</p>
                     <p class="text-sm mb-4">{!! $product->description !!}</p>
                     <div class="row align-items-stretch mb-4">
                         <div class="col-sm-5 pr-sm-0">
@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
                                 <h6> <a class="reset-anchor" href="detail.html">{{ $relasi->name }}</a></h6>
-                                <p class="small text-muted">{{ $relasi->price }}</p>
+                                <p class="small text-muted">@currency($relasi->price)</p>
                             </div>
                         </div>
                     @endforeach
