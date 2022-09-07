@@ -15,6 +15,6 @@ class BerandaController extends Controller
         $categories = Category::all();
         $products = Product::orderBy('id', 'desc')->get();
 
-        return view('frondend.index', compact('products', 'categories'));
+        return view('frondend.collection', compact('products', 'categories'));
     }
 }

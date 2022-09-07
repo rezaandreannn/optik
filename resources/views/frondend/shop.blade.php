@@ -1,6 +1,6 @@
 <x-frond-layout title="Belanja">
     <!-- HERO SECTION-->
-    <section class="py-5 bg-light">
+    <section class="py-5 bg-light" style="margin-top: 80px">
         <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
                 <div class="col-lg-6">
@@ -9,7 +9,7 @@
                 <div class="col-lg-6 text-lg-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-                            <li class="breadcrumb-item"><a class="text-dark" href="index.html">Beranda</a></li>
+                            <li class="breadcrumb-item"><a class="text-dark" href="/">Beranda</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Belanja</li>
                         </ol>
                     </nav>
@@ -27,7 +27,8 @@
                         </strong></div>
                     <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
                         @foreach ($categories as $category)
-                            <li class="mb-2"><a class="reset-anchor active" href="#!">{{ $category->name }}</a>
+                            <li class="mb-2"><a class="reset-anchor text-decoration-none text-muted"
+                                    href="#!">{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -38,10 +39,10 @@
                 <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
                     <div class="row mb-3 align-items-center">
                         <div class="col-lg-6 mb-2 mb-lg-0">
-                            <p class="text-sm text-muted mb-0">Showing 1–12 of 53 results</p>
+                            {{-- <p class="text-sm text-muted mb-0">Showing 1–12 of 53 results</p> --}}
                         </div>
                         <div class="col-lg-6">
-                            <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
+                            {{-- <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                                 <li class="list-inline-item">
                                     <select class="selectpicker" data-customclass="form-control form-control-sm">
                                         <option value>Sort By </option>
@@ -51,28 +52,34 @@
                                         <option value="high-low">Price: High to Low </option>
                                     </select>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="row">
                         <!-- PRODUCT-->
                         @foreach ($products as $product)
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('product.detail', $product->id) }}"><img
-                                                class="img-fluid w-100" src="{{ asset('storage/' . $product->photo) }}"
-                                                alt="{{ $product->name }}"></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Tambah ke keranjang</a></li>
-                                            </ul>
+                            <div class="col-md-6 col-lg-4 col-xl-3 p-2 {{ $product->name }}">
+                                <div class="collection-img position-relative">
+                                    <a href="{{ route('product.detail', $product->id) }}">
+                                        <img src="{{ asset('storage/' . $product->photo) }}" class="w-100 img-fluid">
+                                    </a>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-capitalize my-2">
+                                        @currency($product->price)
+                                        <a href="#" class="badge bg-primary border-0 text-decoration-none"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal{{ $product->id }}">detail</a>
+                                    </p>
+
+                                    <p>{{ $product->name }} - {{ $product->description }}</p>
+                                    <span class="fw-bold">
+                                        <div class="row">
+                                            <a href="http://" class="badge bg-primary text-decoration-none">Tambah ke
+                                                keranjang</a>
+
                                         </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">{{ $product->name }}</a></h6>
-                                    <p class="small text-muted">@currency($product->price)</p>
+                                    </span>
                                 </div>
                             </div>
                         @endforeach
@@ -81,5 +88,66 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    @foreach ($products as $product)
+        <div class="modal fade" id="exampleModal{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail : {{ $product->name }} - @currency($product->price)
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="special-img position-relative overflow-hidden">
+                                    <img src="{{ asset('storage/' . $product->photo) }}" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <span class="fw-bold">Kategori</span> <br><span
+                                        class="text-muted">{{ $product->category->name }}</span>
+                                </p>
+                                <hr>
+                                <p>
+                                    <span class="fw-bold">Deskripsi</span> <br><span
+                                        class="text-muted">{{ $product->description }}</span>
+                                </p>
+
+                            </div>
+                            <div class="row">
+                                <form method="post" action="{{ route('order.store', $product->id) }}"
+                                    class="d-inline">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label for="qty" class="col-sm-2 col-form-label">Jumlah</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="number" name="qty" class="form-control"
+                                                    aria-describedby="qty" min="1" value="1"
+                                                    max="{{ $product->qty }}">
+                                                <div class="input-group-append">
+                                                    <button class="btn bg-primary rounded-0 text-white" type="submit"
+                                                        id="qty">Tambah Ke Keranjang</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="badge bg-primary border-0" data-bs-dismiss="modal">Keluar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 </x-frond-layout>
