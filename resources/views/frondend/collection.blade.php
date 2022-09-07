@@ -1,4 +1,4 @@
-<x-frond-layout>
+<x-frond-layout title="Beranda">
     <x-corousel />
 
     <!-- collection -->

@@ -119,4 +119,13 @@
             </div>
         </section>
     </div>
+
+    @push('scripts')
+        {{-- sukses --}}
+        @if (session('message'))
+            <script>
+                toastr.error("{{ session('message') }}");
+            </script>
+        @endif
+    @endpush
 </x-frond-layout>
