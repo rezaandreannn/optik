@@ -21,11 +21,11 @@ use App\Http\Controllers\Frond\BerandaController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/cek', function () {
-    $daftarProvinsi = RajaOngkir::provinsi()->all();
-    dd($daftarProvinsi);
-    return view('frondend.checkout');
-});
+// Route::get('/cek', function () {
+//     $daftarProvinsi = RajaOngkir::provinsi()->all();
+//     dd($daftarProvinsi);
+//     return view('frondend.checkout');
+// });
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');

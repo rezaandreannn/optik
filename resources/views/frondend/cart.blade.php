@@ -41,7 +41,14 @@
                                 </tr>
                             </thead>
                             <tbody class="border-0">
+                                @php
+                                    $sum = 0;
+                                @endphp
                                 @foreach ($orders as $order)
+                                    @php
+                                        $total = $order->product->price * $order->qty;
+                                        $sum += $total;
+                                    @endphp
                                     <tr>
                                         <th class="ps-0 py-3 border-light" scope="row">
                                             <div class="d-flex align-items-center"><a
@@ -61,7 +68,7 @@
                                             <p class="mb-0 small">{{ $order->qty }}</p>
                                         </td>
                                         <td class="p-3 align-middle border-light">
-                                            <p class="mb-0 small">@currency($order->product->price * $order->qty)</p>
+                                            <p class="mb-0 small">@currency($total)</p>
                                         </td>
                                         <td class="p-3 align-middle border-light">
                                             <form action="{{ route('order.destroy', $order->id) }}" method="POST"
@@ -83,10 +90,15 @@
                         <div class="row align-items-center text-center">
                             <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn bg-primary btn-sm text-white"
                                     href="{{ route('shop') }}"><i class="fas fa-long-arrow-alt-left me-2"> </i>Lanjut
-                                    Belanja</a></div>
-                            <div class="col-md-6 text-md-end"><a class="btn btn-success btn-sm"
-                                    href="checkout.html">Proses Pembayaran<i
-                                        class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
+                                    Belanja</a>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                @if ($orders->count() >= 1)
+                                    <a class="btn btn-success btn-sm" href="checkout.html">Proses Pembayaran<i
+                                            class="fas fa-long-arrow-alt-right ms-2"></i>
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,23 +106,16 @@
                 <div class="col-lg-4">
                     <div class="card border-0 rounded-0 p-lg-4 bg-light">
                         <div class="card-body">
-                            <h5 class="text-uppercase mb-4">Cart total</h5>
+                            <h5 class="text-uppercase mb-4">Keranjang total</h5>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small font-weight-bold">Subtotal</strong><span
-                                        class="text-muted small">$250</span></li>
+                                        class="text-muted small">@currency($sum)</span></li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between mb-4"><strong
-                                        class="text-uppercase small font-weight-bold">Total</strong><span>$250</span>
+                                        class="text-uppercase small font-weight-bold">Total</strong><span>@currency($sum)</span>
                                 </li>
                                 <li>
-                                    {{-- <form action="#">
-                                        <div class="input-group mb-0">
-                                            <input class="form-control" type="text" placeholder="Enter your coupon">
-                                            <button class="btn btn-dark btn-sm w-100" type="submit"> <i
-                                                    class="fas fa-gift me-2"></i>Apply coupon</button>
-                                        </div>
-                                    </form> --}}
                                 </li>
                             </ul>
                         </div>

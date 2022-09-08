@@ -75,9 +75,12 @@
                                     <p>{{ $product->name }} - {{ $product->description }}</p>
                                     <span class="fw-bold">
                                         <div class="row">
-                                            <a href="http://" class="badge bg-primary text-decoration-none">Tambah ke
-                                                keranjang</a>
-
+                                            <form action="{{ route('order.store', $product->id) }}" method="post"
+                                                class="list-inline-item m-0 p-0">
+                                                @csrf
+                                                <button class="btn bg-primary rounded-0 text-white" type="submit">
+                                                    Tambah keranjang</button>
+                                            </form>
                                         </div>
                                     </span>
                                 </div>
@@ -149,5 +152,14 @@
             </div>
         </div>
     @endforeach
+
+    @push('scripts')
+        {{-- sukses --}}
+        @if (session('message'))
+            <script>
+                toastr.success("{{ session('message') }}");
+            </script>
+        @endif
+    @endpush
 
 </x-frond-layout>
