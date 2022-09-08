@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frond\ShopController;
 use App\Http\Controllers\Frond\BerandaController;
-use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,11 @@ use App\Http\Controllers\OrderController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-// Route::get('/', function () {
-//     return view('frondend.index');
-// });
+Route::get('/cek', function () {
+    $daftarProvinsi = RajaOngkir::provinsi()->all();
+    dd($daftarProvinsi);
+    return view('frondend.checkout');
+});
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');

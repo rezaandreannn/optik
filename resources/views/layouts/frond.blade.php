@@ -76,13 +76,13 @@
                         <a class="nav-link text-uppercase text-dark" href="{{ route('beranda') }}">beranda</a>
                     </li>
                     <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-dark" href="{{ route('shop') }}">Kategori</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
                         <a class="nav-link text-uppercase text-dark" href="">tentang kami</a>
                     </li>
                     <li class="nav-item px-2 py-2">
                         <a class="nav-link text-uppercase text-dark" href="">kontak</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="{{ route('shop') }}">Kategori</a>
                     </li>
                 </ul>
             </div>
