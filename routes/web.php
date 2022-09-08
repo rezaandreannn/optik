@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
     Route::post('order/{id}', [OrderController::class, 'store'])->name('order.store');
+    Route::patch('order/{order}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
 

@@ -43,21 +43,24 @@
                             <tbody class="border-0">
                                 @php
                                     $sum = 0;
+                                    $qty = 0;
                                 @endphp
                                 @foreach ($orders as $order)
                                     @php
                                         $total = $order->product->price * $order->qty;
                                         $sum += $total;
+                                        $qty += $order->qty;
                                     @endphp
                                     <tr>
                                         <th class="ps-0 py-3 border-light" scope="row">
                                             <div class="d-flex align-items-center"><a
-                                                    class="reset-anchor d-block animsition-link" href="detail.html"><img
+                                                    class="reset-anchor d-block animsition-link"
+                                                    href="{{ route('product.detail', $order->product->id) }}"><img
                                                         src="{{ asset('storage/' . $order->product->photo) }}"
                                                         alt="..." width="70" /></a>
                                                 <div class="ms-3"><strong class="h6"><a
                                                             class="reset-anchor animsition-link"
-                                                            href="detail.html">{{ $order->product->name }}</a></strong>
+                                                            href="{{ route('product.detail', $order->product->id) }}">{{ $order->product->name }}</a></strong>
                                                 </div>
                                             </div>
                                         </th>
@@ -106,14 +109,17 @@
                 <div class="col-lg-4">
                     <div class="card border-0 rounded-0 p-lg-4 bg-light">
                         <div class="card-body">
-                            <h5 class="text-uppercase mb-4">Keranjang total</h5>
+                            <h5 class="text-uppercase mb-4">Ringkasan Belanja</h5>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex align-items-center justify-content-between"><strong
+                                        class="text-uppercase small font-weight-bold">total Harga ({{ $qty }}
+                                        Barang)</strong><span class="text-muted small">@currency($sum)</span></li>
+                                {{-- <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small font-weight-bold">Subtotal</strong><span
-                                        class="text-muted small">@currency($sum)</span></li>
+                                        class="text-muted small">@currency($sum)</span></li> --}}
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between mb-4"><strong
-                                        class="text-uppercase small font-weight-bold">Total</strong><span>@currency($sum)</span>
+                                        class="text-uppercase small font-weight-bold">Subtotal</strong><span>@currency($sum)</span>
                                 </li>
                                 <li>
                                 </li>

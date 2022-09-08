@@ -32,6 +32,19 @@ class OrderController extends Controller
         return redirect()->back()->with('message', 'Berhasil menambahkan produk ke keranjang');
     }
 
+    public function update(Request $request, Order $order)
+    {
+        if ($request->qty) {
+            $qty = $request->qty;
+        }
+
+        Order::where('id', $order->id)->update([
+            'qty' => $qty
+        ]);
+
+        return redirect()->back()->with('message', 'Berhasil mengubah jumlah produk');
+    }
+
     public function destroy(Order $order)
     {
         Order::where('id', $order->id)

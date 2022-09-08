@@ -6,7 +6,9 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -24,8 +26,14 @@ class ShopController extends Controller
     {
 
         $product = Product::find($id);
+        if (Auth::check()) {
+            $cekProduct = Order::where('product_id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->first();
+        } else {
+            $cekProduct = '';
+        }
 
-
-        return view('frondend.detail', compact('product'));
+        return view('frondend.detail', compact('product', 'cekProduct'));
     }
 }

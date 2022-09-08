@@ -38,17 +38,46 @@
                     <p class="text-muted lead">@currency($product->price)</p>
                     <p class="text-sm mb-4">{!! $product->description !!}</p>
                     <div class="row align-items-stretch mb-4">
-                        <form action="{{ route('order.store', $product->id) }}" method="get">
-                            @csrf
-                            <div class="input-group mb-3">
-                                <input type="number" name="qty" class="form-control" aria-describedby="qty"
-                                    min="1" value="1" max="{{ $product->qty }}">
-                                <div class="input-group-append">
-                                    <button class="btn bg-primary rounded-0 text-white" type="submit"
-                                        id="qty">Tambah Ke Keranjang</button>
+                        @auth
+                            @if ($cekProduct)
+                                <form action="{{ route('order.update', $cekProduct->id) }}" method="post">
+                                    @method('PATCH')
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="number" name="qty" class="form-control" aria-describedby="qty"
+                                            min="1" value="{{ $cekProduct->qty }}" max="{{ $product->qty }}">
+                                        <div class="input-group-append">
+                                            <button class="btn bg-primary rounded-0 text-white" type="submit"
+                                                id="qty">Ubah Jumlah</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            @else
+                                <form action="{{ route('order.store', $product->id) }}" method="post">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="number" name="qty" class="form-control" aria-describedby="qty"
+                                            min="1" value="1" max="{{ $product->qty }}">
+                                        <div class="input-group-append">
+                                            <button class="btn bg-primary rounded-0 text-white" type="submit"
+                                                id="qty">Tambah Ke Keranjang</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            @endif
+                        @else
+                            <form action="{{ route('order.store', $product->id) }}" method="post">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input type="number" name="qty" class="form-control" aria-describedby="qty"
+                                        min="1" value="1" max="{{ $product->qty }}">
+                                    <div class="input-group-append">
+                                        <button class="btn bg-primary rounded-0 text-white" type="submit"
+                                            id="qty">Tambah Ke Keranjang</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endauth
                         <ul class="list-unstyled small d-inline-block">
                             <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">Stok</strong><span
                                     class="ms-2 text-muted">{{ $product->qty }}</span></li>
@@ -178,4 +207,13 @@
                 </div>
             </div>
     </section>
+
+    @push('scripts')
+        {{-- sukses --}}
+        @if (session('message'))
+            <script>
+                toastr.success("{{ session('message') }}");
+            </script>
+        @endif
+    @endpush
 </x-frond-layout>
