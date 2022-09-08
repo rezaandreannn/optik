@@ -215,5 +215,11 @@
                 toastr.success("{{ session('message') }}");
             </script>
         @endif
+        {{-- fail --}}
+        @if (session('failed'))
+            <script>
+                toastr.error("{{ session('failed') }}");
+            </script>
+        @endif
     @endpush
 </x-frond-layout>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frond\ShopController;
 use App\Http\Controllers\Frond\BerandaController;
@@ -34,15 +35,17 @@ Route::get('/product-detail/{id}', [ShopController::class, 'product_detail'])->n
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+    Route::Resource('user', 'App\Http\Controllers\UserController');
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
     Route::post('order/{id}', [OrderController::class, 'store'])->name('order.store');
     Route::patch('order/{order}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 });
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {
     Route::Resource('role', 'App\Http\Controllers\RoleController');
-    Route::Resource('user', 'App\Http\Controllers\UserController');
+
     Route::Resource('category', 'App\Http\Controllers\CategoryController');
     Route::Resource('product', 'App\Http\Controllers\ProductController');
 });

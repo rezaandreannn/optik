@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,11 +24,24 @@ class OrderController extends Controller
             $qty = $request->qty;
         }
 
-        Order::create([
-            'user_id' => Auth::user()->id,
-            'product_id' => $id,
-            'qty' => $qty ?? 1
-        ]);
+
+        $product = Product::all();
+
+        foreach ($product as $item) {
+            $order = Order::where('user_id', Auth::user()->id)
+                ->where('product_id', $item->id)
+                ->where('status', 'pending')
+                ->exists();
+        }
+        if (!$order) {
+            Order::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $id,
+                'qty' => $qty ?? 1
+            ]);
+        } else {
+            return redirect()->back()->with('failed', 'Produk sudah ada di keranjang');
+        }
 
         return redirect()->back()->with('message', 'Berhasil menambahkan produk ke keranjang');
     }

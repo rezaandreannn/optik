@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -75,6 +77,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (Auth::user()->role_id == 2) {
+
+            $provinces = Province::all();
+            return view('frondend.edit_user', compact('user', 'provinces'));
+        }
         return view('backend.user.edit', compact('user'));
     }
 
@@ -87,6 +94,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+        if (Auth::user()->role_id == 2) {
+            $data = $request->validate([
+                'no_hp' => 'required',
+                'province' => 'required',
+                'city' => 'required',
+                'full_address' => 'required',
+            ]);
+
+            User::where('id', $user->id)
+                ->update();
+
+            return redirect('/')->with('message', 'Berhasil edit profil');
+        }
+
         $data =  $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'role_id' => 'required|not_in:0',

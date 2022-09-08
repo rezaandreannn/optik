@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('photo');
             $table->string('qty');
             $table->string('price');
+            $table->string('berat')->default(500);
             $table->string('status')->default('in');
             $table->timestamps();
         });

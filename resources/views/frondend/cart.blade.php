@@ -97,8 +97,8 @@
                             </div>
                             <div class="col-md-6 text-md-end">
                                 @if ($orders->count() >= 1)
-                                    <a class="btn btn-success btn-sm" href="checkout.html">Proses Pembayaran<i
-                                            class="fas fa-long-arrow-alt-right ms-2"></i>
+                                    <a class="btn btn-success btn-sm" href="{{ route('checkout.index') }}">Proses
+                                        Pembayaran<i class="fas fa-long-arrow-alt-right ms-2"></i>
                                     </a>
                                 @endif
                             </div>

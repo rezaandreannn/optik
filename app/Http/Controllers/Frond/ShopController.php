@@ -29,6 +29,7 @@ class ShopController extends Controller
         if (Auth::check()) {
             $cekProduct = Order::where('product_id', $id)
                 ->where('user_id', Auth::user()->id)
+                ->where('status', 'pending')
                 ->first();
         } else {
             $cekProduct = '';
