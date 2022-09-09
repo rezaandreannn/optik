@@ -37,4 +37,15 @@ class ShopController extends Controller
 
         return view('frondend.detail', compact('product', 'cekProduct'));
     }
+
+    public function categories($id)
+    {
+
+        $category = Category::find($id);
+        $products = Product::orderBy('id', 'desc')
+            ->where('category_id', $id)
+            ->get();
+
+        return view('frondend.categories', compact('products', 'category'));
+    }
 }

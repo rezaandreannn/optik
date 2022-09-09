@@ -30,6 +30,7 @@ use App\Http\Controllers\Frond\BerandaController;
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop-category/{id}', [ShopController::class, 'categories'])->name('shop.category');
 Route::get('/product-detail/{id}', [ShopController::class, 'product_detail'])->name('product.detail');
 
 
