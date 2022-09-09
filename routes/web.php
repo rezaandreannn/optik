@@ -19,9 +19,9 @@ use App\Http\Controllers\Frond\BerandaController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/contact', function () {
+    return view('frondend.contact');
+});
 // Route::get('/cek', function () {
 //     $daftarProvinsi = RajaOngkir::provinsi()->all();
 //     dd($daftarProvinsi);

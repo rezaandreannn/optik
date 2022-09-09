@@ -1,4 +1,4 @@
-<x-main-layout title="Contact-Me">
+<x-frond-layout title="Contact-Me">
     {{-- <x-corousel /> --}}
     <div class="container py-5 mt-5">
         @if (session('success'))
@@ -10,22 +10,22 @@
         <div class="card my-5 ">
             <h5 class="card-header bg-primary text-white text-uppercase text-center">Kontak Kami</h5>
             <div class="card-body">
-                <form action="{{ route('contact.store') }}" method="POST">
+                <form action="#" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username"
-                            placeholder="Hidayah safety indonesia" value="{{ old('username') }}">
+                            placeholder="masukan nama anda" value="{{ old('username') }}">
                     </div>
                     <div class="mb-3">
                         <label for="no_hp" class="form-label">No Hp</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="089649933542"
-                            value="{{ old('no_hp') }}">
+                        <input type="text" class="form-control" id="no_hp" name="no_hp"
+                            placeholder="08964993354" value="{{ old('no_hp') }}">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
-                            placeholder="hidayahsafetyindonesia16@gmail.com">
+                        <input type="email" class="form-control" name="email" id="email"
+                            value="{{ old('email') }}" placeholder="contoh@gmail.com">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Pesan</label>
@@ -50,4 +50,4 @@
         </div>
     </div>
 
-</x-main-layout>
+</x-frond-layout>
