@@ -37,7 +37,9 @@
             <div class="order-lg-2 nav-btns">
                 @auth
                     @php
-                        $cart = App\Models\Order::where('user_id', Auth::user()->id)->get();
+                        $cart = App\Models\Order::where('user_id', Auth::user()->id)
+                            ->where('status', 'pending')
+                            ->get();
                     @endphp
                     <a href="{{ route('order.index') }}" class="text-decoration-none me-4">
                         <button type="button" class="btn position-relative">
@@ -50,6 +52,7 @@
                         @csrf
                         <button type="submit" class="ml-5 btn btn-danger">Keluar</button>
                     </form>
+
                     {{-- <a href="{{ route('login') }}" class="ml-5 btn btn-success">
                         Masuk
                     </a> --}}
@@ -92,7 +95,6 @@
 
 
 
-
     <!-- about us -->
     {{ $slot }}
     <!-- end of about us -->
@@ -108,9 +110,9 @@
                 <div class="col-md-6 col-lg-3">
                     <a class="text-uppercase text-decoration-none brand text-white"
                         href="index.html">{{ config('app.name') }}</a>
-                    <p class="text-white text-muted mt-3">Kami Juga termasuk Supplier dan Distributor Perlengkapan
-                        Safety dan Peralatan Keselamatan Kerja
-                        di Jakarta. Berbagai macam alat keselamatan kerja kami sediakan untuk memenuhi kebutuhan anda.
+                    <p class="text-white text-muted mt-3">Senantiasa berusaha untuk mencapai yang terbaik dalam Optik
+                        kacamata, dan memberi manfaat bagi Masyarakat luas dalam menciptakan lapangan Pekerjaan baru
+                        serta menyediakan frame kacamata yang baik, sesuai kebutuhan konsumen dengan harga terjangkau.
                     </p>
                 </div>
 
@@ -144,8 +146,8 @@
                             <i class="fas fa-map-marked-alt"></i>
                         </span>
                         <span class="fw-light">
-                            LTC Glodok, Lantai GF1, Blok C8, No. 6, Jl. Hayam Wuruk No.127, RT.1/RW.6, Mangga Besar,
-                            Kec. Taman Sari, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11180
+                            di Jl. Imam Bonjol No 19 Hadimulyo Barat Metro, Kelurahan Hadimulyo Barat, Kecamatan Metro
+                            Pusat Kota Metro, Provinsi Lampung.
                         </span>
                     </div>
                     <div class="d-flex justify-content-start align-items-start my-2 text-muted">
@@ -153,7 +155,7 @@
                             <i class="fas fa-envelope"></i>
                         </span>
                         <span class="fw-light">
-                            hidayahsafetyindonesia16@gmail.com
+                            optiksuryajayametro@gmail.com
                         </span>
                     </div>
                     <div class="d-flex justify-content-start align-items-start my-2 text-muted">
@@ -161,7 +163,7 @@
                             <i class="fas fa-phone-alt"></i>
                         </span>
                         <span class="fw-light">
-                            +628 9649 9335 42
+                            0812-7232-1704
                         </span>
                     </div>
                 </div>
@@ -171,13 +173,14 @@
                     <div>
                         <ul class="list-unstyled d-flex">
                             <li>
-                                <a href="https://www.facebook.com/HidayahSafetyIndonesia/?ref=pages_you_manage"
+                                <a href="https://www.facebook.com/optik.suryajaya"
                                     class="text-white text-decoration-none text-muted fs-4 me-4">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                <a href="https://www.instagram.com/optik.suryajaya.metro/?hl=id"
+                                    class="text-white text-decoration-none text-muted fs-4 me-4">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>

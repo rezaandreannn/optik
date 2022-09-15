@@ -19,6 +19,9 @@ class CreateOrdersTable extends Migration
             $table->foreignId('product_id');
             $table->string('qty');
             $table->string('status')->default('pending');
+            $table->string('bank')->nullable();
+            $table->string('kurir')->nullable();
+            $table->string('bukti')->nullable();
             $table->timestamps();
         });
     }

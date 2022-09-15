@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::get('kota/{id}/city', [UserController::class, 'getCity'])->name('city');
+    Route::get('cek/{code}/ongkir', [CheckoutController::class, 'hitungOngkir'])->name('ongkir');
+    Route::put('checkout/', [CheckoutController::class, 'prosesBayar'])->name('checkout');
 });
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {

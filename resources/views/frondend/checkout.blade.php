@@ -23,66 +23,56 @@
             <h2 class="h5 text-uppercase mb-4">Rincian Penagihan</h2>
             <div class="row">
                 <div class="col-lg-7">
-                    <form action="#">
-                        <div class="row gy-3">
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="name">Nama</label>
-                                <input class="form-control form-control-lg" type="text" id="name"
-                                    value="{{ Auth::user()->name }}" disabled>
+
+                    <div class="row gy-3">
+                        <div class="col-md-3">Nama</div>
+                        <div class="col-md-8">: {{ Auth::user()->name }}</div>
+                        <div class="col-md-3">Email</div>
+                        <div class="col-md-8">: {{ Auth::user()->email }}</div>
+                        <div class="col-md-3">No Hp</div>
+                        <div class="col-md-8">: {{ Auth::user()->no_hp }}</div>
+                        @php
+                            $pro = App\Models\Province::find(Auth::user()->province);
+                            $city = App\Models\City::where('city_id', Auth::user()->city)->first();
+                        @endphp
+                        <div class="col-md-3">Provinsi</div>
+                        <div class="col-md-8">: {{ $pro->title }}</div>
+                        <div class="col-md-3">Kota</div>
+                        <div class="col-md-8">: {{ $city->title }}</div>
+                        <div class="col-md-3">Full Alamat</div>
+                        <div class="col-md-8">: {{ Auth::user()->full_address }}</div>
+                        <form action="{{ route('checkout') }}" method="post" class="d-inline">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Pilih Bank</label>
+                                <div class="col-sm-10">
+                                    <select name="bank" id="" class="form-control">
+                                        <option value="">-- Pilih --</option>
+                                        <option value="1092832">BRI</option>
+                                        <option value="">-- Pilih --</option>
+
+                                    </select>
+                                </div>
                             </div>
-                            {{-- <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="lastName">Last name </label>
-                                <input class="form-control form-control-lg" type="text" id="lastName"
-                                    placeholder="Enter your last name">
-                            </div> --}}
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="email">Email </label>
-                                <input class="form-control form-control-lg" type="email" id="email"
-                                    value="{{ Auth::user()->email }}" disabled>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="phone">Phone number </label>
-                                <input class="form-control form-control-lg" type="tel" id="phone"
-                                    placeholder="e.g. +02 245354745">
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="company">Company name (optional)
-                                </label>
-                                <input class="form-control form-control-lg" type="text" id="company"
-                                    placeholder="Your company name">
-                            </div>
-                            <div class="col-lg-6 form-group">
-                                <label class="form-label text-sm text-uppercase" for="country">Country</label>
-                                <select class="country" id="country"
-                                    data-customclass="form-control form-control-lg rounded-0">
-                                    <option value>Choose your country</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-12">
-                                <label class="form-label text-sm text-uppercase" for="address">Address line 1 </label>
-                                <input class="form-control form-control-lg" type="text" id="address"
-                                    placeholder="House number and street name">
-                            </div>
-                            <div class="col-lg-12">
-                                <label class="form-label text-sm text-uppercase" for="addressalt">Address line 2
-                                </label>
-                                <input class="form-control form-control-lg" type="text" id="addressalt"
-                                    placeholder="Apartment, Suite, Unit, etc (optional)">
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="city">Town/City </label>
-                                <input class="form-control form-control-lg" type="text" id="city">
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="state">State/County </label>
-                                <input class="form-control form-control-lg" type="text" id="state">
+                            <div class="form-group row mt-2">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Pilih Kurir</label>
+                                <div class="col-sm-10">
+                                    <select name="kurir" id="" class="form-control" id="kurir">
+                                        <option value="" selected>-- Pilih --</option>
+                                        <option value="jne">JNE</option>
+                                        <option value="pos">POS</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="col-lg-12 form-group">
-                                <button class="btn btn-dark" type="submit">Place order</button>
+
+                            <div class="col-lg-12 form-group mt-2 text-md-end">
+                                <button class="btn btn-dark" type="submit">Bayar</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
                 <!-- ORDER SUMMARY-->
                 <div class="col-lg-5">
@@ -121,10 +111,6 @@
                                                             href="{{ route('product.detail', $order->product->id) }}"><img
                                                                 src="{{ asset('storage/' . $order->product->photo) }}"
                                                                 alt="..." width="70" /></a>
-                                                        {{-- <div class="ms-3"><strong class="h6"><a
-                                                                    class="reset-anchor animsition-link"
-                                                                    href="{{ route('product.detail', $order->product->id) }}">{{ $order->product->name }}</a></strong>
-                                                        </div> --}}
                                                     </div>
                                                 </th>
                                                 <td class="p-3 align-middle border-light">
@@ -137,7 +123,16 @@
                                         @endforeach
                                         <tr>
                                             <td colspan="2" class="text-end">Total</td>
+                                            <input type="hidden" id="sum" value="{{ $sum }}">
                                             <td>@currency($sum)</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-end border-0">ongkos kirem</td>
+                                            <td class="border-0">Rp. <span id="ongkir">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-end border-0">SubTotal</td>
+                                            <td class="border-0">Rp. <span id="sub">0</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -151,6 +146,31 @@
 
 
     @push('scripts')
+
+        <script>
+            $('select[name="kurir"]').on('change', function() {
+                let id = $(this).val();
+                // alert(id)
+
+                if (id) {
+                    jQuery.ajax({
+                        url: '/cek/' + id + '/ongkir',
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            let sum = $('#sum').val()
+                            $('#ongkir').text(data)
+                            let subtotal = parseInt(sum) + parseInt(data)
+                            $('#sub').text(subtotal)
+                        }
+
+                    });
+                } else {
+
+                }
+            });
+        </script>
+
         {{-- sukses --}}
         @if (session('message'))
             <script>

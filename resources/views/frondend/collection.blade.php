@@ -42,8 +42,7 @@
                                         class="list-inline-item m-0 p-0">
                                         @csrf
                                         <button class="btn bg-primary rounded-0 text-white" type="submit">
-                                            Tambah
-                                            ke keranjang</button>
+                                            Tambah Ke Keranjang</button>
                                     </form>
                                 </div>
                             </span>

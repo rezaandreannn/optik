@@ -13,6 +13,7 @@ class OrderController extends Controller
     {
 
         $orders =  Order::where('user_id', Auth::user()->id)
+            ->where('status', 'pending')
             ->get();
 
         return view('frondend.cart', compact('orders'));
@@ -26,6 +27,7 @@ class OrderController extends Controller
 
 
         $product = Product::all();
+        // dd($product);
 
         foreach ($product as $item) {
             $order = Order::where('user_id', Auth::user()->id)

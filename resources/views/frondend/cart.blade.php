@@ -111,12 +111,11 @@
                         <div class="card-body">
                             <h5 class="text-uppercase mb-4">Ringkasan Belanja</h5>
                             <ul class="list-unstyled mb-0">
+
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small font-weight-bold">total Harga ({{ $qty }}
-                                        Barang)</strong><span class="text-muted small">@currency($sum)</span></li>
-                                {{-- <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small font-weight-bold">Subtotal</strong><span
-                                        class="text-muted small">@currency($sum)</span></li> --}}
+                                        Barang)</strong><span class="text-muted small">@currency($sum)</span>
+                                </li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between mb-4"><strong
                                         class="text-uppercase small font-weight-bold">Subtotal</strong><span>@currency($sum)</span>
