@@ -14,7 +14,9 @@
             {{-- <h2 class="h5 text-uppercase">Rincian Penagihan</h2> --}}
             <div class="row">
                 <div class="col-lg-7">
-                    <form action="#">
+                    <form action="{{ route('user.update', $user->id) }}" method="post">
+                        @method('PATCH')
+                        @csrf
                         <div class="row gy-3">
                             <div class="col-lg-6">
                                 <label class="form-label text-sm text-uppercase" for="name">Nama</label>
@@ -28,32 +30,49 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label text-sm text-uppercase" for="phone">No hp</label>
-                                <input class="form-control form-control-lg" type="tel" id="phone"
+                                <input class="form-control form-control-lg" type="tel" id="phone" name="no_hp"
                                     value="{{ old('no_hp', $user->no_hp) }}">
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="form-label text-sm text-uppercase" for="province">provinsi</label>
-                                <select class="province form-select" id="province">
-                                    @foreach ($provinces as $province)
-                                        @if ($province->title == $user->province)
-                                            <option value="{{ $province->title }}" selected>{{ $province->title }}
+                                <select class="province form-select" id="province" name="province">
+                                    @foreach ($provinces as $province => $value)
+                                        @if ($province == $user->province)
+                                            <option value="{{ $province }}" selected>{{ $value }}
                                             </option>
                                         @else
-                                            <option value="{{ $province->title }}">{{ $province->title }}</option>
+                                            <option value="{{ $province }}">{{ $value }}</option>
                                         @endif
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="form-label text-sm text-uppercase" for="city">Kota</label>
-                                <select class="city form-select" id="city">
-                                    <option value>Choose your country</option>
+                                <select class="city form-select" id="city" name="city">
+                                    @php
+                                        
+                                        $cities = App\Models\City::where('province_id', $user->province)->pluck('title', 'city_id');
+                                        
+                                    @endphp
+                                    @if ($user->city)
+                                        @foreach ($cities as $city => $value)
+                                            @if ($city == $user->city)
+                                                <option value="{{ $city }}" selected>{{ $value }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $city }}">{{ $value }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <option value>kota</option>
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label text-sm text-uppercase" for="full_address">alamat
                                     Lengkap</label>
-                                <textarea class="form-control" name="full_address" id="floatingTextarea">{{ old('full_address', $user->no_hp) }}</textarea>
+                                <textarea class="form-control" name="full_address" id="floatingTextarea">{{ old('full_address', $user->full_address) }}</textarea>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <button class="btn btn-dark rounded-0 text-white border-0" type="submit"
@@ -69,6 +88,30 @@
 
 
     @push('scripts')
+        <script>
+            $('select[name="province"]').on('change', function() {
+                let provinceId = $(this).val();
+                // alert(provinceId)
+                if (provinceId) {
+                    jQuery.ajax({
+                        url: '/kota/' + provinceId + '/city',
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="city"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="city"]').append('<option value="' + key + '">' +
+                                    value +
+                                    '</option>')
+                            });
+                        }
+
+                    });
+                } else {
+                    $('select[name="city"]').empty();
+                }
+            });
+        </script>
         {{-- sukses --}}
         @if (session('message'))
             <script>

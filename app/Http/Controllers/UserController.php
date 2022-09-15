@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,7 +80,7 @@ class UserController extends Controller
     {
         if (Auth::user()->role_id == 2) {
 
-            $provinces = Province::all();
+            $provinces = Province::pluck('title', 'province_id');
             return view('frondend.edit_user', compact('user', 'provinces'));
         }
         return view('backend.user.edit', compact('user'));
@@ -95,6 +96,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
+        // dd($request);
+
         if (Auth::user()->role_id == 2) {
             $data = $request->validate([
                 'no_hp' => 'required',
@@ -104,26 +107,33 @@ class UserController extends Controller
             ]);
 
             User::where('id', $user->id)
-                ->update();
+                ->update($data);
 
             return redirect('/')->with('message', 'Berhasil edit profil');
+        } else {
+            $data =  $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'role_id' => 'required|not_in:0',
+
+            ]);
+
+            if ($request->password !=  null) {
+                $data['password'] = Hash::make($request->password);
+            }
+
+
+            User::where('id', $user->id)
+                ->update($data);
+
+            return redirect('user')->with('success', 'Berhasil mengubah data user');
         }
+    }
 
-        $data =  $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'role_id' => 'required|not_in:0',
+    public function getCity($id)
+    {
 
-        ]);
-
-        if ($request->password !=  null) {
-            $data['password'] = Hash::make($request->password);
-        }
-
-
-        User::where('id', $user->id)
-            ->update($data);
-
-        return redirect('user')->with('success', 'Berhasil mengubah data user');
+        $city = City::where('province_id', $id)->pluck('title', 'city_id');
+        return json_encode($city);
     }
 
     /**

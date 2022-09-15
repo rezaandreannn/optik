@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Http\Controllers\CheckoutController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('order/{order}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('kota/{id}/city', [UserController::class, 'getCity'])->name('city');
 });
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {
