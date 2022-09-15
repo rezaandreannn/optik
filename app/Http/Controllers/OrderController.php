@@ -26,15 +26,16 @@ class OrderController extends Controller
         }
 
 
-        $product = Product::all();
+        $product = Product::orderBy('id', 'asc')->get();
         // dd($product);
 
-        foreach ($product as $item) {
-            $order = Order::where('user_id', Auth::user()->id)
-                ->where('product_id', $item->id)
-                ->where('status', 'pending')
-                ->exists();
-        }
+        $order = Order::where('user_id', Auth::user()->id)
+            ->where('product_id', $id)
+            ->where('status', 'pending')
+            ->first();
+
+
+
         if (!$order) {
             Order::create([
                 'user_id' => Auth::user()->id,
