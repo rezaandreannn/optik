@@ -53,7 +53,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{ asset('backend/guest/images/title-logo.png') }}" alt="..."
+                            <img src="{{ asset('backend/build/avatar-2.png') }}" alt="..."
                                 class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
@@ -84,7 +84,7 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('backend/guest/images/title-logo.png') }}"
+                                    <img src="{{ asset('backend/build/avatar-2.png') }}"
                                         alt="">{{ auth()->user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
