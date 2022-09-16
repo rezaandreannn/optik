@@ -66,9 +66,13 @@
                                 </div>
                             </div>
 
-
                             <div class="col-lg-12 form-group mt-2 text-md-end">
-                                <button class="btn btn-dark" type="submit">Bayar</button>
+                                @if (Auth::user()->city != null)
+                                    <button class="btn btn-dark" type="submit">Bayar</button>
+                                @else
+                                    <a href="{{ route('user.edit', Auth::user()->id) }}" class="btn btn dark">Lengkapi
+                                        alamat tujuan</a>
+                                @endif
                             </div>
                         </form>
                     </div>

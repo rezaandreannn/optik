@@ -9,11 +9,17 @@ use Illuminate\Http\Request;
 
 class BerandaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $categories = Category::all();
-        $products = Product::orderBy('id', 'desc')->get();
+        $cari = $request->search;
+        if ($cari) {
+            $products = Product::orderBy('id', 'desc')->where('name', 'like', "%" . $cari . "%")->get();
+        } else {
+            $products = Product::orderBy('id', 'desc')->get();
+        }
+
 
         // ubah jika qty = 0 status out
         $pro = Product::where('qty', '0')->get();

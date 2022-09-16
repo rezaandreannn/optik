@@ -35,20 +35,20 @@
             <div class="mt-3 form-check">
                 <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
                 <label for="remember_me" class="form-check-label text-sm">
-                    {{ __('Remember me') }}
+                    {{ __('Ingat saya') }}
                 </label>
             </div>
 
             <div class="d-flex justify-content-end mt-4">
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                     <a class="text-muted" href="{{ route('password.request') }}"
                         style="margin-right: 15px; margin-top: 15px;">
                         {{ __('Forgot your password?') }}
                     </a>
-                @endif
+                @endif --}}
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{ __('Masuk') }}
                 </x-button>
             </div>
         </form>

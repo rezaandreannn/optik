@@ -12,7 +12,7 @@
                     <li><a href="{{ route('category.index') }}">Kategori</a></li>
                     <li><a href="{{ route('product.index') }}">Produk</a></li>
                     {{-- <li><a href="">Produk</a></li> --}}
-                    <li><a href="">Pesan</a></li>
+                    <li><a href="{{ route('cetak.index') }}">Cetak Laporan</a></li>
                 </ul>
             </li>
 

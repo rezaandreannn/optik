@@ -10,8 +10,8 @@
                     <div class="col-sm-12 col-md-6">
                         <form action="" method="get">
                             <div class="input-group mb-3 mt-2">
-                                <input type="text" class="form-control" name="search"
-                                    placeholder="Cari nama Produk">
+                                <input type="text" class="form-control" name="search" placeholder="Cari nama Produk"
+                                    @if (request('search')) value="{{ request('search') }}" @endif>
                                 <button class="btn bg-primary text-white border-0" type="submit">Cari</button>
                             </div>
                         </form>

@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\OrderController;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frond\ShopController;
 use App\Http\Controllers\Frond\BerandaController;
+use App\Http\Controllers\Frond\HistoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,13 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::get('kota/{id}/city', [UserController::class, 'getCity'])->name('city');
     Route::get('cek/{code}/ongkir', [CheckoutController::class, 'hitungOngkir'])->name('ongkir');
     Route::put('checkout/', [CheckoutController::class, 'prosesBayar'])->name('checkout');
+    Route::get('histori/', [HistoriController::class, 'index'])->name('histori.index');
 });
 
 Route::middleware('auth', 'ceklogin:admin')->group(function () {
     Route::Resource('role', 'App\Http\Controllers\RoleController');
-
     Route::Resource('category', 'App\Http\Controllers\CategoryController');
     Route::Resource('product', 'App\Http\Controllers\ProductController');
+    Route::get('cetak/', [CetakController::class, 'index'])->name('cetak.index');
+    Route::post('cetak/', [CetakController::class, 'cetak'])->name('cetak.store');
 });
 
 
