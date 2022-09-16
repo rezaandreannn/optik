@@ -79,7 +79,7 @@
                                         <td class="p-3 align-middle border-light">
                                             <p class="mb-0 small">@currency($total)</p>
                                         </td>
-                                        <td class="p-3 align-middle border-light">
+                                        {{-- <td class="p-3 align-middle border-light">
                                             <form action="{{ route('order.destroy', $order->id) }}" method="POST"
                                                 class="reset-anchor">
                                                 @method('DELETE')
@@ -88,7 +88,7 @@
                                                     <i class="fas fa-trash-alt small text-muted"></i>
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

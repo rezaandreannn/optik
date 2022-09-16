@@ -1,4 +1,4 @@
-<x-frond-layout title="About Us">
+<x-frond-layout title="About Me">
     {{-- <x-corousel /> --}}
     <section id="about" class="py-5">
         <div class="container">
