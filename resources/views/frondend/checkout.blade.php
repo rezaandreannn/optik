@@ -49,9 +49,7 @@
                                 <div class="col-sm-10">
                                     <select name="bank" id="" class="form-control">
                                         <option value="">-- Pilih --</option>
-                                        <option value="1092832">BRI</option>
-                                        <option value="">-- Pilih --</option>
-
+                                        <option value="7632-01-007520-53-0">BRI</option>
                                     </select>
                                 </div>
                             </div>
