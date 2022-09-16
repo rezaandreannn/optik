@@ -88,7 +88,7 @@
 
                     @endauth
                     <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="">kontak</a>
+                        <a class="nav-link text-uppercase text-dark" href="/about">Tentang kami</a>
                     </li>
                 </ul>
             </div>

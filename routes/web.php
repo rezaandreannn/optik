@@ -22,8 +22,8 @@ use App\Http\Controllers\Frond\HistoriController;
 |
 */
 
-Route::get('/contact', function () {
-    return view('frondend.contact');
+Route::get('/about', function () {
+    return view('frondend.about');
 });
 // Route::get('/cek', function () {
 //     $daftarProvinsi = RajaOngkir::provinsi()->all();
@@ -32,6 +32,7 @@ Route::get('/contact', function () {
 // });
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+// Route::get('/about-me', [BerandaController::class, 'index'])->name('about_me');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop-category/{id}', [ShopController::class, 'categories'])->name('shop.category');
 Route::get('/product-detail/{id}', [ShopController::class, 'product_detail'])->name('product.detail');
